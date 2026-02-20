@@ -1,0 +1,332 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salamanca Digital Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    
+
+
+</head>
+
+<body>
+    <!-- PÁGINA PRINCIPAL -->
+    <div id="mainPage">
+        <header>
+            <div class="logo-section" onclick="volverInicio()">
+                <div class="logo">SALAMANCA<br>GUANAJUATO</div>
+                <span class="header-title">Salamanca Digital Marketplace</span>
+            </div>
+            <a class="nav-link" onclick="volverInicio()">Inicio</a>
+        </header>
+
+        <section class="hero-section">
+            <h1 class="hero-title">Compra productos de<br>emprendedores locales</h1>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="">
+                <button onclick="buscar()">Buscar</button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn" onclick="abrirCategoria('ropa')">
+                    <span class="icon"></span>
+                    <span>Ropa</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('hogar')">
+                    <span class="icon"></span>
+                    <span>Hogar</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('alimentos')">
+                    <span class="icon"></span>
+                    <span>Alimentos</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('arte')">
+                    <span class="icon"></span>
+                    <span>Arte</span>
+                </button>
+            </div>
+
+            <div class="carousel-section">
+                <button class="arrow arrow-left" onclick="cambiarSlide(-1)">‹</button>
+                <button class="arrow arrow-right" onclick="cambiarSlide(1)">›</button>
+                
+                <div class="carousel-item active">
+                    <div class="product-image">🧇</div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>LA COLMENA WAFFLES</h2>
+                        <h3>Haciendo tus días más deliciosos</h3>
+                        <p>En la Colmena Waffles disfrutarás de deliciosos Waffles y malteadas preparadas con ingredientes frescos y de alta calidad.</p>
+                        <p><strong>Realiza tu pedido desde el botón</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://www.maspedidos.menu/lacolmenawaffles/lacolmenawaffles?fm=pickup" class="btn-whatsapp">
+                                
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>PIZZERÍA DON GIUSEPPE</h2>
+                        <h3>Sabor italiano auténtico</h3>
+                        <p>Pizzas artesanales con masa hecha en casa y los mejores ingredientes importados de Italia. ¡Una experiencia única!</p>
+                        <p><strong>Ordena tu pizza favorita</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://wa.me/1234567891" class="btn-whatsapp">
+                               
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>CAFÉ AROMA</h2>
+                        <h3>El mejor café de Salamanca</h3>
+                        <p>Granos selectos de café mexicano, tostado artesanal y preparaciones especiales. Despierta tus sentidos cada mañana.</p>
+                        <p><strong>Visítanos o pide a domicilio</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://wa.me/1234567892" class="btn-whatsapp">
+                             
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="irASlide(0)"></span>
+                    <span class="dot" onclick="irASlide(1)"></span>
+                    <span class="dot" onclick="irASlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="emprendedores-section">
+            <h2 class="emprendedores-title">Los nuevos emprendedores Salmantinos</h2>
+        </div>
+
+        <div class="emprendedores-grid">
+            <div class="emprendedor-card">
+                <div class="emprendedor-logo" style="background: #333;">Meraki<br>Digital</div>
+                <div class="emprendedor-info">
+                    <h3>Meraki Digital</h3>
+                    <h4>Diseño gráfico</h4>
+                    <p>Amor y creatividad en cada diseño. Branding, logos, redes sociales y contenido digital para tu negocio.</p>
+                    <div class="emprendedor-actions">
+                        <a href="#" class="btn-vermas">Ver más</a>
+                        <a href="https://wa.me/1234567893" class="btn-whatsapp">
+                            <span>📱</span>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA DE CATEGORÍA -->
+    <div id="categoriaPage" class="page-categoria">
+        <header>
+            <div class="logo-section" onclick="volverInicio()">
+                <div class="logo">SALAMANCA<br>GUANAJUATO</div>
+                <span class="header-title">Salamanca Digital Marketplace</span>
+            </div>
+            <a class="nav-link" onclick="volverInicio()">← Volver al Inicio</a>
+        </header>
+
+        <div class="categoria-header">
+            <h1 id="categoriaTitulo">Negocios de Ropa</h1>
+            <p id="categoriaDescripcion">Descubre los mejores negocios locales</p>
+        </div>
+
+        <div class="negocios-container">
+            <div class="negocios-grid" id="negociosGrid"></div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE PROMOCIÓN DEL MARKETPLACE -->
+    <section class="promo-section">
+        <div class="promo-container">
+            <div class="promo-header">
+                <h2>¿Por qué elegirnos?</h2>
+                <p>Somos el marketplace de confianza en Salamanca</p>
+            </div>
+            
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <h3>✓ Negocios Verificados</h3>
+                    <p>Todos nuestros negocios son verificados y evaluados para garantizar calidad y confianza.</p>
+                    <ul>
+                        <li>Verificación de documentos legales</li>
+                        <li>Evaluación de servicio</li>
+                        <li>Garantía de responsabilidad</li>
+                    </ul>
+                </div>
+                
+                <div class="promo-card">
+                    <h3> Todo en un Solo Lugar</h3>
+                    <p>Encuentra todos los negocios locales sin salir de casa. Fácil, rápido y seguro.</p>
+                    <ul>
+                        <li>Múltiples categorías</li>
+                        <li>Búsqueda inteligente</li>
+                        <li>Contacto directo con negocios</li>
+                    </ul>
+                </div>
+                
+                <div class="promo-card">
+                    <h3>💚 Apoyamos lo Local</h3>
+                    <p>Impulsamos el comercio local y a emprendedores salmantinos para crecer juntos.</p>
+                    <ul>
+                        <li>Apoyo a nuevos emprendedores</li>
+                        <li>Promoción de talento local</li>
+                        <li>Economía comunitaria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CON REGULACIONES -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Salamanca Marketplace</h4>
+                    <p>La plataforma de confianza para conectar negocios locales con la comunidad salmantina.</p>
+                    <p style="margin-top: 15px;">📍 Salamanca, Guanajuato</p>
+                    <p>📧 contacto@salamancamarket.com</p>
+                    <p>📱 WhatsApp: +52 477 123 4567</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Para Negocios</h4>
+                    <ul>
+                        <li><a href="#" onclick="abrirPlanesPublicidad(); return false;">📢 Planes y Publicidad</a></li>
+                        <li><a href="https://wa.me/521234567890?text=Hola,%20quiero%20registrar%20mi%20negocio">Registro de Negocio</a></li>
+                        <li><a href="#">Verificación</a></li>
+                        <li><a href="#">Requisitos</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#" onclick="alert('Sección de Términos y Condiciones en desarrollo'); return false;">Términos y Condiciones</a></li>
+                        <li><a href="#" onclick="alert('Sección de Aviso de Privacidad en desarrollo'); return false;">Aviso de Privacidad</a></li>
+                        <li><a href="#" onclick="alert('Sección de Políticas de Uso en desarrollo'); return false;">Políticas de Uso</a></li>
+                        <li><a href="#" onclick="alert('Sección de Código de Conducta en desarrollo'); return false;">Código de Conducta</a></li>
+                        <li><a href="#" onclick="alert('Sección de Regulaciones en desarrollo'); return false;">Regulaciones Aplicables</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Reportar Problema</a></li>
+                        <li><a href="#">Sugerencias</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Salamanca Digital Marketplace. Todos los derechos reservados.</p>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    Este marketplace actúa como medio de difusión. Los negocios son responsables de sus productos, servicios y cumplimiento de regulaciones aplicables.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    
+
+    <!-- PÁGINA DE PLANES Y PUBLICIDAD -->
+    <div id="planesPage" class="page-planes">
+        <header>
+            <div class="logo-section" onclick="volverInicio()">
+                <div class="logo">SALAMANCA<br>GUANAJUATO</div>
+                <span class="header-title">Salamanca Digital Marketplace</span>
+            </div>
+            <a class="nav-link" onclick="volverInicio()">← Volver al Inicio</a>
+        </header>
+
+        <div class="planes-hero">
+            <h1>¿Tienes un negocio? ¡Únete a nosotros!</h1>
+            <p>Ofrecemos dos modalidades adaptadas a tus necesidades</p>
+        </div>
+
+        <section class="modalidades-section">
+            <div class="modalidades-container">
+                <div class="modalidades-grid">
+                    <!-- Modalidad Estudiantes -->
+                    <div class="modalidad-card">
+                        <span class="modalidad-badge">🎓 ESTUDIANTES</span>
+                        <h3>Plan Emprendedor Joven</h3>
+                        <div class="precio">GRATIS</div>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px;">Primer mes / Luego $299 MXN/mes</p>
+                        <ul>
+                            <li>Espacio en "Nuevos Emprendedores"</li>
+                            <li>Aparece 1 mes destacado</li>
+                            <li>Perfil verificado básico</li>
+                            <li>Contacto directo por WhatsApp</li>
+                            <li>Ideal para estudiantes y nuevos negocios</li>
+                            <li>Apoyo al emprendimiento local</li>
+                        </ul>
+                        <a href="https://wa.me/521234567890?text=Hola,%20quiero%20información%20sobre%20el%20Plan%20Emprendedor%20Joven" class="btn-contacto" target="_blank">Solicitar Información</a>
+                    </div>
+                    
+                    <!-- Modalidad Negocios Establecidos -->
+                    <div class="modalidad-card">
+                        <span class="modalidad-badge">🏆 PREMIUM</span>
+                        <h3>Plan Negocio Premium</h3>
+                        <div class="precio">$799 <span style="font-size: 24px;">MXN/mes</span></div>
+                        <p style="text-align: center; color: #666; margin-bottom: 20px;">Publicidad destacada</p>
+                        <ul>
+                            <li>Aparición en carrusel principal</li>
+                            <li>Perfil verificado completo</li>
+                            <li>Listado en categorías</li>
+                            <li>Badge de "Negocio Verificado"</li>
+                            <li>Mayor visibilidad y alcance</li>
+                            <li>Estadísticas de visualización</li>
+                            <li>Soporte prioritario</li>
+                        </ul>
+                        <a href="https://wa.me/521234567890?text=Hola,%20quiero%20información%20sobre%20el%20Plan%20Negocio%20Premium" class="btn-contacto" target="_blank">Contratar Ahora</a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 50px; padding: 30px; background: white; border-radius: 15px;">
+                    <h3 style="color: #8B4513; margin-bottom: 15px;">¿Necesitas más información?</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Contáctanos directamente y te ayudaremos a elegir el mejor plan para tu negocio</p>
+                    <a href="https://wa.me/521234567890?text=Hola,%20quiero%20más%20información%20sobre%20los%20planes%20de%20publicidad" class="btn-contacto" style="display: inline-block; max-width: 300px;" target="_blank">📱 Contactar por WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer también en página de planes -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Salamanca Digital Marketplace. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
+
