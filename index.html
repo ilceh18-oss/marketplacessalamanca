@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salamanca Digital Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #8B4513;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: #A0522D;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="city" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23D2B48C" width="100" height="100"/><rect fill="%23C19A6B" x="10" y="40" width="15" height="60"/><rect fill="%23C19A6B" x="30" y="30" width="20" height="70"/><rect fill="%23C19A6B" x="55" y="50" width="18" height="50"/><rect fill="%23C19A6B" x="78" y="35" width="15" height="65"/></pattern></defs><rect fill="url(%23city)" width="1200" height="600"/></svg>');
+            background-size: cover;
+            padding: 60px 40px 80px;
+            text-align: center;
+            min-height: 500px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            display: flex;
+            gap: 0;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 15px 40px;
+            background: #D2691E;
+            color: white;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .category-btn {
+            background: white;
+            padding: 15px 30px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background: #f0f0f0;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .carousel-section {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .carousel-content {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .carousel-item {
+            display: none;
+        }
+
+        .carousel-item.active {
+            display: flex;
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .badge {
+            background: #FFD700;
+            color: #8B4513;
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .product-info h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .product-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-vermas {
+            background: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            background: #ddd;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #8B4513;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .arrow-left { left: -20px; }
+        .arrow-right { right: -20px; }
+
+        .emprendedores-section {
+            background: #8B4513;
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 1000px;
+            border-radius: 10px;
+        }
+
+        .emprendedores-title {
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .emprendedores-grid {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .emprendedor-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            gap: 25px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .emprendedor-logo {
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .emprendedor-info {
+            flex: 1;
+        }
+
+        .emprendedor-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .emprendedor-info h4 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .emprendedor-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .emprendedor-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* PÁGINA DE CATEGORÍA */
+        .page-categoria {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page-categoria.active {
+            display: block;
+        }
+
+        .categoria-header {
+            background: #8B4513;
+            color: white;
+            padding: 30px 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .categoria-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .categoria-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .negocios-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .negocios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+        }
+
+        .negocio-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .negocio-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .negocio-logo {
+            width: 90px;
+            height: 90px;
+            background: #333;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .negocio-info {
+            flex: 1;
+        }
+
+        .negocio-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .negocio-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .negocio-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            .carousel-content {
+                flex-direction: column;
+            }
+            .negocios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- PÁGINA PRINCIPAL -->
+    <div id="mainPage">
+        <header>
+            <div class="logo-section" onclick="volverInicio()">
+                <div class="logo">SALAMANCA<br>GUANAJUATO</div>
+                <span class="header-title">Salamanca Digital Marketplace</span>
+            </div>
+            <a class="nav-link" onclick="volverInicio()">Inicio</a>
+        </header>
+
+        <section class="hero-section">
+            <h1 class="hero-title">Compra productos de<br>emprendedores locales</h1>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="">
+                <button onclick="buscar()">Buscar</button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn" onclick="abrirCategoria('ropa')">
+                    <span class="icon">👕</span>
+                    <span>Ropa</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('hogar')">
+                    <span class="icon">🏠</span>
+                    <span>Hogar</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('alimentos')">
+                    <span class="icon">🍎</span>
+                    <span>Alimentos</span>
+                </button>
+                <button class="category-btn" onclick="abrirCategoria('arte')">
+                    <span class="icon">🎨</span>
+                    <span>Arte</span>
+                </button>
+            </div>
+
+            <div class="carousel-section">
+                <button class="arrow arrow-left" onclick="cambiarSlide(-1)">‹</button>
+                <button class="arrow arrow-right" onclick="cambiarSlide(1)">›</button>
+                
+                <div class="carousel-item active">
+                    <div class="product-image">🧇</div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>LA COLMENA WAFFLES</h2>
+                        <h3>Haciendo tus días más deliciosos</h3>
+                        <p>En la Colmena Waffles disfrutarás de deliciosos Waffles y malteadas preparadas con ingredientes frescos y de alta calidad.</p>
+                        <p><strong>Realiza tu pedido desde el botón</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://wa.me/1234567890" class="btn-whatsapp">
+                                <span>📱</span>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="product-image">🍕</div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>PIZZERÍA DON GIUSEPPE</h2>
+                        <h3>Sabor italiano auténtico</h3>
+                        <p>Pizzas artesanales con masa hecha en casa y los mejores ingredientes importados de Italia. ¡Una experiencia única!</p>
+                        <p><strong>Ordena tu pizza favorita</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://wa.me/1234567891" class="btn-whatsapp">
+                                <span>📱</span>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="product-image">☕</div>
+                    <div class="product-info">
+                        <span class="badge">E</span>
+                        <h2>CAFÉ AROMA</h2>
+                        <h3>El mejor café de Salamanca</h3>
+                        <p>Granos selectos de café mexicano, tostado artesanal y preparaciones especiales. Despierta tus sentidos cada mañana.</p>
+                        <p><strong>Visítanos o pide a domicilio</strong></p>
+                        <div class="product-actions">
+                            <a href="#" class="btn-vermas">Ver más</a>
+                            <a href="https://wa.me/1234567892" class="btn-whatsapp">
+                                <span>📱</span>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="irASlide(0)"></span>
+                    <span class="dot" onclick="irASlide(1)"></span>
+                    <span class="dot" onclick="irASlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <div class="emprendedores-section">
+            <h2 class="emprendedores-title">Los nuevos emprendedores Salmantinos</h2>
+        </div>
+
+        <div class="emprendedores-grid">
+            <div class="emprendedor-card">
+                <div class="emprendedor-logo" style="background: #333;">Meraki<br>Digital</div>
+                <div class="emprendedor-info">
+                    <h3>Meraki Digital</h3>
+                    <h4>Diseño gráfico</h4>
+                    <p>Amor y creatividad en cada diseño. Branding, logos, redes sociales y contenido digital para tu negocio.</p>
+                    <div class="emprendedor-actions">
+                        <a href="#" class="btn-vermas">Ver más</a>
+                        <a href="https://wa.me/1234567893" class="btn-whatsapp">
+                            <span>📱</span>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA DE CATEGORÍA -->
+    <div id="categoriaPage" class="page-categoria">
+        <header>
+            <div class="logo-section" onclick="volverInicio()">
+                <div class="logo">SALAMANCA<br>GUANAJUATO</div>
+                <span class="header-title">Salamanca Digital Marketplace</span>
+            </div>
+            <a class="nav-link" onclick="volverInicio()">← Volver al Inicio</a>
+        </header>
+
+        <div class="categoria-header">
+            <h1 id="categoriaTitulo">Negocios de Ropa</h1>
+            <p id="categoriaDescripcion">Descubre los mejores negocios locales</p>
+        </div>
+
+        <div class="negocios-container">
+            <div class="negocios-grid" id="negociosGrid"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DE INFORMACIÓN DEL NEGOCIO -->
+    <div class="modal-overlay" id="modalNegocio" onclick="cerrarModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close" onclick="cerrarModal()">✕</button>
+                <div class="modal-icon" id="modalIcono">🏪</div>
+                <h2 id="modalNombre">Nombre del Negocio</h2>
+                <div style="text-align: center;">
+                    <span class="verificado-badge">✓ Negocio Verificado</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="info-section">
+                    <h3>📝 Descripción</h3>
+                    <p id="modalDescripcion">Descripción del negocio</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>🕒 Horario</h3>
+                    <p id="modalHorario">Lunes a Viernes: 9:00 AM - 7:00 PM<br>Sábados: 10:00 AM - 6:00 PM<br>Domingos: Cerrado</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>📍 Dirección</h3>
+                    <p id="modalDireccion">Centro de Salamanca, Guanajuato</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>📱 Contacto</h3>
+                    <p>Para realizar pedidos y consultas, contacta directamente por WhatsApp</p>
+                </div>
+
+                <div class="modal-actions">
+                    <a href="#" id="modalWhatsapp" class="btn-whatsapp" style="flex: 1;">
+                        <span>📱</span>
+                        <span>Ordenar por WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CARRUSEL
+        let slideActual = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.dot');
+
+        function mostrarSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            if (n >= slides.length) slideActual = 0;
+            if (n < 0) slideActual = slides.length - 1;
+            
+            slides[slideActual].classList.add('active');
+            dots[slideActual].classList.add('active');
+        }
+
+        function cambiarSlide(direccion) {
+            slideActual += direccion;
+            mostrarSlide(slideActual);
+        }
+
+        function irASlide(n) {
+            slideActual = n;
+            mostrarSlide(slideActual);
+        }
+
+        setInterval(() => {
+            cambiarSlide(1);
+        }, 5000);
+
+        // BASE DE DATOS DE NEGOCIOS
+        const negocios = {
+            ropa: [
+                { nombre: "Boutique Eleganza", icono: "👗", descripcion: "Ropa de mujer elegante y moderna. Vestidos, blusas y accesorios exclusivos.", telefono: "4771234567", horario: "Lunes a Sábado: 10:00 AM - 8:00 PM<br>Domingos: 11:00 AM - 6:00 PM", direccion: "Calle Hidalgo #123, Centro, Salamanca, Gto." },
+                { nombre: "Estilo Urbano MX", icono: "👕", descripcion: "Moda urbana para hombre y mujer. Streetwear y tendencias actuales.", telefono: "4771234568", horario: "Lunes a Viernes: 9:00 AM - 7:00 PM<br>Sábados: 10:00 AM - 6:00 PM<br>Domingos: Cerrado", direccion: "Av. Juárez #456, Col. Centro, Salamanca, Gto." },
+                { nombre: "Zapatos El Paso", icono: "👞", descripcion: "Calzado de calidad para toda la familia. Marcas nacionales e importadas.", telefono: "4771234569", horario: "Lunes a Sábado: 9:00 AM - 8:00 PM<br>Domingos: 10:00 AM - 5:00 PM", direccion: "Portal Guerrero #78, Centro, Salamanca, Gto." },
+                { nombre: "Telas y Más", icono: "🧵", descripcion: "Telas finas, hilos y accesorios para confección. Todo para tu creatividad.", telefono: "4771234570", horario: "Lunes a Viernes: 8:30 AM - 6:30 PM<br>Sábados: 9:00 AM - 5:00 PM<br>Domingos: Cerrado", direccion: "Calle Morelos #234, Centro, Salamanca, Gto." },
+                { nombre: "Ropa Infantil Cielo", icono: "👶", descripcion: "Ropa para bebés y niños. Prendas cómodas y adorables de 0 a 12 años.", telefono: "4771234571", horario: "Lunes a Sábado: 10:00 AM - 7:00 PM<br>Domingos: 11:00 AM - 4:00 PM", direccion: "Plaza Principal #56, Centro, Salamanca, Gto." }
+            ],
+            hogar: [
+                { nombre: "Casa Bonita Deco", icono: "🏠", descripcion: "Decoración moderna para tu hogar. Cuadros, plantas y accesorios únicos.", telefono: "4771234572", horario: "Lunes a Viernes: 9:00 AM - 7:00 PM<br>Sábados: 10:00 AM - 6:00 PM<br>Domingos: Cerrado", direccion: "Calle Allende #89, Centro, Salamanca, Gto." },
+                { nombre: "Muebles Salamanca", icono: "🛋️", descripcion: "Muebles artesanales de madera. Salas, comedores y recámaras a tu medida.", telefono: "4771234573", horario: "Lunes a Sábado: 9:00 AM - 7:00 PM<br>Domingos: 10:00 AM - 3:00 PM", direccion: "Blvd. Insurgentes #345, Col. Industrial, Salamanca, Gto." },
+                { nombre: "Textiles del Hogar", icono: "🛏️", descripcion: "Sábanas, cortinas y edredones de alta calidad. Confort para tu casa.", telefono: "4771234574", horario: "Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 10:00 AM - 5:00 PM<br>Domingos: Cerrado", direccion: "Av. Guerrero #167, Centro, Salamanca, Gto." },
+                { nombre: "Cocina Pro", icono: "🍳", descripcion: "Utensilios y accesorios para cocina. Todo lo que necesitas para cocinar.", telefono: "4771234575", horario: "Lunes a Sábado: 8:00 AM - 8:00 PM<br>Domingos: 9:00 AM - 5:00 PM", direccion: "Calle 5 de Mayo #234, Centro, Salamanca, Gto." },
+                { nombre: "Jardines Verdes", icono: "🌱", descripcion: "Plantas, macetas y accesorios de jardinería. Dale vida a tus espacios.", telefono: "4771234576", horario: "Martes a Domingo: 8:00 AM - 6:00 PM<br>Lunes: Cerrado", direccion: "Carretera Salamanca-Celaya Km 2.5, Salamanca, Gto." }
+            ],
+            alimentos: [
+                { nombre: "Panadería El Trigo", icono: "🥖", descripcion: "Pan artesanal recién horneado. Bolillo, telera y pan dulce tradicional.", telefono: "4771234577", horario: "Todos los días: 6:00 AM - 9:00 PM", direccion: "Calle Zaragoza #45, Centro, Salamanca, Gto." },
+                { nombre: "Jugos Naturales Vita", icono: "🥤", descripcion: "Jugos, smoothies y licuados naturales. Frescura y salud en cada vaso.", telefono: "4771234578", horario: "Lunes a Sábado: 8:00 AM - 8:00 PM<br>Domingos: 9:00 AM - 6:00 PM", direccion: "Jardín Principal #12, Centro, Salamanca, Gto." },
+                { nombre: "Carnes Don Pedro", icono: "🥩", descripcion: "Carnes frescas de primera calidad. Res, cerdo, pollo y cortes especiales.", telefono: "4771234579", horario: "Lunes a Sábado: 7:00 AM - 7:00 PM<br>Domingos: 7:00 AM - 3:00 PM", direccion: "Mercado Municipal, Local 45, Salamanca, Gto." },
+                { nombre: "Dulces Tradicionales", icono: "🍬", descripcion: "Dulces típicos mexicanos. Alegrías, palanquetas y cajeta artesanal.", telefono: "4771234580", horario: "Lunes a Domingo: 9:00 AM - 8:00 PM", direccion: "Portal de Artesanos #23, Centro, Salamanca, Gto." },
+                { nombre: "Verduras Frescas GTO", icono: "🥬", descripcion: "Verduras frescas directo del campo. Productos orgánicos y de temporada.", telefono: "4771234581", horario: "Martes, Jueves y Sábados: 7:00 AM - 2:00 PM", direccion: "Mercado Hidalgo, Puesto 67, Salamanca, Gto." }
+            ],
+            arte: [
+                { nombre: "Galería Arte Local", icono: "🎨", descripcion: "Pinturas y obras de arte originales. Artistas salmantinos talentosos.", telefono: "4771234582", horario: "Miércoles a Domingo: 11:00 AM - 7:00 PM<br>Lunes y Martes: Cerrado", direccion: "Calle Independencia #89, Centro, Salamanca, Gto." },
+                { nombre: "Cerámica Artesanal", icono: "🏺", descripcion: "Piezas de cerámica hechas a mano. Vajillas, jarrones y decoración única.", telefono: "4771234583", horario: "Lunes a Sábado: 10:00 AM - 6:00 PM<br>Domingos: Cerrado", direccion: "Callejón del Arte #34, Centro, Salamanca, Gto." },
+                { nombre: "Joyería Plata y Piedra", icono: "💎", descripcion: "Joyería artesanal en plata. Anillos, aretes y collares con diseños únicos.", telefono: "4771234584", horario: "Lunes a Viernes: 10:00 AM - 7:00 PM<br>Sábados: 10:00 AM - 5:00 PM<br>Domingos: Cerrado", direccion: "Plaza de la Constitución #78, Centro, Salamanca, Gto." },
+                { nombre: "Fotografía Momentos", icono: "📸", descripcion: "Sesiones fotográficas profesionales. Bodas, eventos y retratos artísticos.", telefono: "4771234585", horario: "Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: Bajo cita previa<br>Domingos: Cerrado", direccion: "Av. Madero #156, Col. Centro, Salamanca, Gto." },
+                { nombre: "Bordados Mexicanos", icono: "🧶", descripcion: "Textiles bordados a mano. Blusas, manteles y piezas decorativas tradicionales.", telefono: "4771234586", horario: "Lunes a Sábado: 9:00 AM - 6:00 PM<br>Domingos: Cerrado", direccion: "Casa de la Cultura, Planta Baja, Salamanca, Gto." }
+            ]
+        };
+
+        const infoCategoria = {
+            ropa: { titulo: "Negocios de Ropa", descripcion: "Encuentra las mejores tiendas de moda y calzado en Salamanca" },
+            hogar: { titulo: "Negocios de Hogar", descripcion: "Todo para decorar y equipar tu hogar con estilo" },
+            alimentos: { titulo: "Negocios de Alimentos", descripcion: "Productos frescos y deliciosos de emprendedores locales" },
+            arte: { titulo: "Negocios de Arte", descripcion: "Arte y artesanías únicas hechas por talentosos artistas salmantinos" }
+        };
+
+        function abrirCategoria(categoria) {
+            // Ocultar página principal
+            document.getElementById('mainPage').classList.add('hidden');
+            
+            // Mostrar página de categoría
+            document.getElementById('categoriaPage').classList.add('active');
+            
+            // Actualizar título y descripción
+            document.getElementById('categoriaTitulo').textContent = infoCategoria[categoria].titulo;
+            document.getElementById('categoriaDescripcion').textContent = infoCategoria[categoria].descripcion;
+            
+            // Cargar negocios
+            const negociosGrid = document.getElementById('negociosGrid');
+            negociosGrid.innerHTML = '';
+            
+            negocios[categoria].forEach(negocio => {
+                const card = document.createElement('div');
+                card.className = 'negocio-card';
+                card.innerHTML = `
+                    <div class="negocio-logo">${negocio.icono}</div>
+                    <div class="negocio-info">
+                        <h3>${negocio.nombre}</h3>
+                        <p>${negocio.descripcion}</p>
+                        <div class="negocio-actions">
+                            <a href="#" class="btn-vermas" onclick="abrirModal('${negocio.nombre}', '${negocio.icono}', '${negocio.descripcion}', '${negocio.horario}', '${negocio.direccion}', '${negocio.telefono}'); return false;">Ver más</a>
+                            <a href="https://wa.me/52${negocio.telefono}" class="btn-whatsapp">
+                                <span>📱</span>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                negociosGrid.appendChild(card);
+            });
+            
+            // Scroll al inicio
+            window.scrollTo(0, 0);
+        }
+
+        function volverInicio() {
+            document.getElementById('mainPage').classList.remove('hidden');
+            document.getElementById('categoriaPage').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        function buscar() {
+            const termino = document.getElementById('searchInput').value.toLowerCase();
+            console.log('Buscando:', termino);
+        }
+
+        function abrirModal(nombre, icono, descripcion, horario, direccion, telefono) {
+            document.getElementById('modalIcono').textContent = icono;
+            document.getElementById('modalNombre').textContent = nombre;
+            document.getElementById('modalDescripcion').textContent = descripcion;
+            document.getElementById('modalHorario').innerHTML = horario;
+            document.getElementById('modalDireccion').textContent = direccion;
+            document.getElementById('modalWhatsapp').href = `https://wa.me/52${telefono}`;
+            document.getElementById('modalNegocio').classList.add('active');
+        }
+
+        function cerrarModal(event) {
+            if (!event || event.target.id === 'modalNegocio') {
+                document.getElementById('modalNegocio').classList.remove('active');
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                buscar();
+            }
+        });
+    </script>
+
+</body>
+</html>
